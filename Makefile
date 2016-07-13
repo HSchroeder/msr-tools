@@ -20,7 +20,8 @@ LDFLAGS  =
 
 BIN	= wrmsr rdmsr cpuid
 
-sbindir = /usr/sbin
+PREFIX ?= /usr
+sbindir = $(PREFIX)/sbin
 
 all: $(BIN)
 
@@ -31,7 +32,8 @@ distclean: clean
 	rm -f *~ \#*
 
 install: all
-	install -m 755 $(BIN) $(sbindir)
+	install -d -m 755 $(DESTDIR)$(sbindir)
+	install -m 755 $(BIN) $(DESTDIR)$(sbindir)
 
 .o:
 	$(CC) $(LDFLAGS) -o $@ $<
